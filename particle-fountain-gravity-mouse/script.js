@@ -4,10 +4,10 @@ var width = canvas.width = window.innerWidth;
 var height = canvas.height = window.innerHeight;
 var particles = [];
 var colors = ['#029DAF', '#E5D599', '#FFC219', '#F07C19', '#E32551'];
-var amount = 500;
+var amount = 5000;
 var speedX = 1;
 var speedY = 1;
-var gravity = 0.01;
+var gravity = 0.025;
 var mouseDistance = 40;
 
 // create particles
@@ -51,7 +51,7 @@ function createParticle(i) {
 function Particle(x, y, vx, vy, size, color, opacity) {
 
     var originalSize = size,
-        maxSize = size * 5;
+        maxSize = size * 15;
 
     function reset() {
         x = width * 0.5;
@@ -75,6 +75,8 @@ function Particle(x, y, vx, vy, size, color, opacity) {
         vy += gravity;
         x += vx;
         y += vy;
+
+        size += .25;
 
         // check if particle is near mouse
         if(mouse){
@@ -117,7 +119,9 @@ function Particle(x, y, vx, vy, size, color, opacity) {
     this.draw = function() {
         ctx.globalAlpha = opacity;
         ctx.fillStyle = color;
-        ctx.fillRect(x, y, size, size);
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, 2 * Math.PI, false);
+        ctx.fill();
     }
 }
 
