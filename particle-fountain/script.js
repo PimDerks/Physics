@@ -4,10 +4,10 @@ var width = canvas.width = window.innerWidth;
 var height = canvas.height = window.innerHeight;
 var particles = [];
 var colors = ['#029DAF', '#E5D599', '#FFC219', '#F07C19', '#E32551'];
-var amount = 500;
+var amount = 1000;
 var speedX = 1;
 var speedY = 1;
-
+var gravity = 0.04;
 
 // create particles
 function initParticles() {
@@ -49,7 +49,21 @@ function createParticle(i) {
 
 function Particle(x, y, vx, vy, size, color, opacity) {
 
+    function reset() {
+        x = width*0.5;
+        y = height*0.5;
+        opacity = 0.5 + Math.random()*0.5;
+        vx = -2+Math.random()*4;
+        vy = Math.random()*-3;
+    }
+
     this.update = function() {
+        // if a particle has faded to nothing we can reset it to the starting position
+        if (opacity - 0.005 > 0) opacity -= 0.005 ;
+        else reset();
+
+        // add gravity to vy
+        vy += gravity;
         x += vx;
         y += vy;
     }
