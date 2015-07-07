@@ -27,11 +27,12 @@ function createParticle(i) {
     var vx,
         vy
 
-    var randomX = !!Math.floor(Math.random() * 2),
-        randomY = !!Math.floor(Math.random() * 2);
+    // get random direction (true = positive direction, false = negative direction)
+    var directionX = !!Math.floor(Math.random() * 2),
+        directionY = !!Math.floor(Math.random() * 2);
 
-    vx = (randomX ? -speedX : speedX) * Math.random();
-    vy = Math.random()* (randomY ? -speedY : speedY);
+    vx = (directionX ? -speedX : speedX) * Math.random();
+    vy = Math.random()* (directionY ? -speedY : speedY);
 
     // randomize size and opacity a little & pick a color from our color palette
     var size = 5+Math.random()*5;
