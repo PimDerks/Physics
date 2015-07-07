@@ -31,7 +31,7 @@ function animate() {
     // update velocity with acceleration
     vx += ax;
     vy += ay;
-    
+
     // update position with velocity
     x += vx;
     y += vy;
